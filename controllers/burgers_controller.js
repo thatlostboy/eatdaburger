@@ -27,17 +27,34 @@ router.post("/api/burgers", function(req, res) {
   console.log("Display Add:\n",newburger)
   burger.add(newburger, function(result){
     console.log(result)
+    res.json({id: result.insertId})
   });
 });
 
 
 // route to update a burger as eaten
-router.put("/api/burger/:id", function(req, res) {
+router.put("/api/burgers/:id", function(req, res) {
   var burgerID =  req.params.id;
   burger.devour(burgerID, function(result) {
       console.log(result)
+      if (result.changedRows == 0) {
+        return res.status(404).end();
+      } else {
+        res.status(200).end();
+      }
   });
 });
+
+// route to delete all burgers
+router.delete("/api/burgers", function(req, res) {
+  burger.clear(function(result){
+    if (results.affectedRows==0) {
+      return res.status(404).end()
+    } else {
+      res.status(200).end()
+    }
+  })
+})
 
 
 // Export routes for server.js to use.

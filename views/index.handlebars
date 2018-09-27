@@ -1,20 +1,77 @@
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron">
     <div class="container">
         <h1 class="text-center">Eat Da Burger</h1>
         <img class="img-fluid" src="../assets/img/burgerPic.png">
-    </div>
-    <div class="row">
-        <div class="col-sm-5 text-right">New Burgers</div>
-        <div class="col-sm-2 text-center"> | </div>
-        <div class="col-sm-5"> Eaten burgers</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            FORM To ADD NEW BURGER
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                add a Burger!
+                <form class="form-inline">
+                    <div class="form-group mx-auto">
+                        <label for="inputPassword2" class="sr-only">Password</label>
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary mx-auto">Confirm identity</button>
+                </form>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="row">
+                    <div class="col text-right">
+                        Burger Menu
+                    </div>
+                </div>
+                {{#each burgers}}
+                {{#if this.devoured }}
+                {{else}}
+                <div class="row">
+                    <div class="col text-right">
+                        {{this.burger_name}} <button class="btn devourme" data-id="{{this.id}}">Devour It! </button>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+            <div class="col-sm-2 text-center"> | </div>
+            <div class="col-sm-5">
+                <div class="row">
+                    <div class="col">
+                        Eaten Burgers
+                    </div>
+                </div>
+                {{#each burgers}}
+                {{#if this.devoured }}
+
+                <div class="row">
+                    <div class="col">
+                        {{this.burger_name}}
+                    </div>
+                </div>
+                {{else}}
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+
     </div>
 </div>
 
+<script>
+    $(function () {
+        $(".devourme").on("click", function (event) {
+            event.preventDefault();
+            id = $(this).data("id");
 
-
-</div>
+            // Send the PUT request.
+            $.ajax("/api/burgers/" + id, {
+                type: "PUT",
+            }).then(
+                function () {
+                    console.log("changed status to devoured");
+                    // Reload the page to get the updated list
+                    location.reload();
+                }
+            );
+        })
+    });
+</script>
