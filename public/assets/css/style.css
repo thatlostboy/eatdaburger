@@ -1,0 +1,17 @@
+
+#banner {
+    color: darkgreen;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 6em;
+    font-weight: bold;
+}
+
+.burgerheader {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.eatenitems {
+    font-style: italic;
+    color: gray;
+}
