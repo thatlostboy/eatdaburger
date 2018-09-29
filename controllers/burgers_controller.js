@@ -21,6 +21,16 @@ router.get("/", function(req, res) {
 
 // API routes
 
+router.get("/api/burgers", function(req, res) {
+  burger.all(function(data) {
+    var burgerObject = {
+      burgers: data
+    };
+    console.log(burgerObject);
+    res.json(burgerObject);
+  });
+});
+
 // route to add a burger
 router.post("/api/burgers", function(req, res) {
   newburger = req.body.burger_name
@@ -48,7 +58,7 @@ router.put("/api/burgers/:id", function(req, res) {
 // route to delete all burgers
 router.delete("/api/burgers", function(req, res) {
   burger.clear(function(result){
-    if (results.affectedRows==0) {
+    if (result.affectedRows==0) {
       return res.status(404).end()
     } else {
       res.status(200).end()

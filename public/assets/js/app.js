@@ -31,8 +31,23 @@ $(function () {
                 // Reload the page to get the updated list
                 location.reload();
             }
-        );
-        
+        );  
     })
+
+    $("#apiburgerclear").on("click", function (event) {
+        event.preventDefault();
+        console.log("Hello?")
+
+        // Send the POST request
+        $.ajax("/api/burgers", {
+            type: "DELETE",
+        }).then(
+            function () {
+                location.reload();
+            }
+        );  
+    })
+
+    // #apiburgerlist:hover, #apiburgerclear:hover
 
 });
