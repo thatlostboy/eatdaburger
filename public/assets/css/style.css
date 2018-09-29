@@ -1,4 +1,6 @@
-
+body {
+    background-color: rgb(233,236,239);
+}
 #banner {
     color: darkgreen;
     font-family: 'Shadows Into Light', cursive;
