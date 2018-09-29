@@ -9,10 +9,16 @@
                         <label for="Burger Name" class="sr-only">Burger Name</label>
                         <input type="text" style="width: 400px" class="form-control mx-1 mb-3" id="burgername" placeholder="New Burger Name">
                         <button type="submit" id="addburger" class="btn btn-success mx-1 mb-3">Add To Menu</button>
-                    </div>
-                    
+                    </div>  
                 </form>
             </div>
+        </div>
+        <div class="row">
+                <footer class="footer">
+      <div class="container">
+        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a>
+      </div>
+    </footer>
         </div>
         <div class="row">
             <div class="col-sm-5">
@@ -44,7 +50,7 @@
 
                 <div class="row my-1 eatenitems p-1">
                     <div class="col">
-                        {{this.burger_name}}
+                        {{this.burger_name}} has been devoured!
                     </div>
                 </div>
                 {{else}}
