@@ -19,35 +19,38 @@ $(function () {
         event.preventDefault();
         newburger = $("#burgername").val().trim();
 
-        console.log("added new burger: ", newburger);
+        if (newburger == "") {
+            alert("You didn't even enter a name!!")
+        } else {
+            console.log("added new burger: ", newburger);
 
-        // Send the POST request
-        $.ajax("/api/burgers", {
-            type: "POST",
-            data: { 'burger_name':newburger }
-        }).then(
-            function () {
-                console.log("added new burger: ", newburger);
-                // Reload the page to get the updated list
-                location.reload();
-            }
-        );  
+            // Send the POST request
+            $.ajax("/api/burgers", {
+                type: "POST",
+                data: { 'burger_name': newburger }
+            }).then(
+                function () {
+                    console.log("added new burger: ", newburger);
+                    // Reload the page to get the updated list
+                    location.reload();
+                }
+            );
+        }
     })
 
     $("#apiburgerclear").on("click", function (event) {
         event.preventDefault();
-        console.log("Hello?")
-
-        // Send the POST request
-        $.ajax("/api/burgers", {
-            type: "DELETE",
-        }).then(
-            function () {
-                location.reload();
-            }
-        );  
+        if (confirm("Are you sure you want to clear all the burgers?")) {
+            // Send the POST request
+            $.ajax("/api/burgers", {
+                type: "DELETE",
+            }).then(
+                function () {
+                    location.reload();
+                }
+            );
+        }
     })
 
-    // #apiburgerlist:hover, #apiburgerclear:hover
 
 });
